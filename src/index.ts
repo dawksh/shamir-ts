@@ -27,3 +27,20 @@ async function getSecret(keys: Array<keys>): Promise<number> {
 
     return l0 + l1
 }
+
+
+async function testShamir() {
+    const superDuperSecret = Math.floor(Math.random() * 100);
+    const quorumKeys: keys[] = await generateKeys(superDuperSecret);
+    const index = [];
+    while (index.length < 2) {
+        let r = Math.floor(Math.random() * 4);
+        if (index.indexOf(r) === -1) index.push(r);
+    }
+
+    const secret = await getSecret([quorumKeys[index[0]], quorumKeys[index[1]]])
+    console.log("super duper secret: ", superDuperSecret);
+    console.log("secret: ", secret);
+}
+
+testShamir()
